@@ -9,9 +9,11 @@ I just aim to brush up my solving skills and utilize more multiple languages in 
 
 ## Languages Used
 - Python 3
+- C++
 
 ## Progress
 
 |  Day  | Language | Solution |
 | :---: | :------: | :------: |
 |   1   | Python3  |  `2/2`   |
+|   2   |   C++    |  `2/2`   |
