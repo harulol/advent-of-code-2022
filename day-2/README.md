@@ -1,3 +1,8 @@
+# Day 2
+### This file is solely for archiving the prompt, that's it.
+
+<br />
+
 --- Day 2: Rock Paper Scissors ---
 
 The Elves begin to set up camp on the beach. To decide whose tent gets to be closest to the snack storage, a giant Rock Paper Scissors tournament is already in progress.
