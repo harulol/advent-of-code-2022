@@ -5,7 +5,7 @@
 
 My stupid takes on [Advent of Code 2022](https://adventofcode.com/2022).
 
-I just aim to brush up my solving skills and utilize more multiple languages in my solutions.
+I just aim to brush up my solving skills and utilize multiple languages in my solutions.
 
 ## Languages Used
 - Python 3

@@ -6,10 +6,10 @@ function overlaps(first, second) {
   const contained = (first.min <= second.min && first.max >= second.max) || (second.min <= first.min && second.max >= first.max);
 
   // Overlapped means just one end is inside the other's range, and vice versa.
-  const overlappied = (first.min <= second.max && first.min >= second.min) || (first.max <= second.max && first.max >= second.min)
+  const overlapped = (first.min <= second.max && first.min >= second.min) || (first.max <= second.max && first.max >= second.min)
     || (second.min <= first.max && second.min >= first.min) || (second.max <= first.max && second.max >= first.min);
 
-  return [contained, overlappied];
+  return [contained, overlapped];
 }
 
 let fullyContainedPairs = 0;

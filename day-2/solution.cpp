@@ -77,7 +77,7 @@ int get_score_part_two(char opponent, char player)
     return points;
 }
 
-void solve_part_one()
+void solve()
 {
     std::string line;
     std::fstream file;
@@ -99,6 +99,6 @@ void solve_part_one()
 
 int main()
 {
-    solve_part_one();
+    solve();
     return 0;
 }
