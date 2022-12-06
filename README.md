@@ -13,6 +13,7 @@ I just aim to brush up my solving skills and utilize multiple languages in my so
 - Go
 - JavaScript
 - Java
+- C
 
 ## Progress
 
@@ -23,3 +24,4 @@ I just aim to brush up my solving skills and utilize multiple languages in my so
 |   3   |     Go     |  `2/2`   |
 |   4   | JavaScript |  `2/2`   |
 |   5   |    Java    |  `2/2`   |
+|   6   |     C      |  `2/2`   |
