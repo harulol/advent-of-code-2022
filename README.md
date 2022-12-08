@@ -14,6 +14,7 @@ I just aim to brush up my solving skills and utilize multiple languages in my so
 - JavaScript
 - Java
 - C
+- TypeScript
 
 ## Progress
 
@@ -26,3 +27,4 @@ I just aim to brush up my solving skills and utilize multiple languages in my so
 |   5   |    Java    |  `2/2`   |
 |   6   |     C      |  `2/2`   |
 |   7   |  Python3   |  `2/2`   |
+|   8   | TypeScript |  `2/2`   |
