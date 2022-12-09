@@ -28,3 +28,4 @@ I just aim to brush up my solving skills and utilize multiple languages in my so
 |   6   |     C      |  `2/2`   |
 |   7   |  Python3   |  `2/2`   |
 |   8   | TypeScript |  `2/2`   |
+|   9   |  Python3   |  `1/2`   |
