@@ -1,69 +1,77 @@
 lines = [line.strip() for line in open("./input.txt", "r").readlines()]
 
-# All for part one cuz I suck.
-head = (0, 0)
-tail = (0, 0)
-slots = set()
+class Node:
+    x: int
+    y: int
 
-def move_tail():
-    global head, tail, slots
-    headX, headY = head
-    tailX, tailY = tail
+    def __init__(self):
+        self.x = 0
+        self.y = 0
 
-    slots.add((tailX, tailY))
+    def tuple(self):
+        return (self.x, self.y)
 
-    if abs(headX - tailX) <= 1 and abs(headY - tailY) <= 1:
-        print(f"Didn't need to move! {headX} {headY} - {tailX} {tailY} - {len(slots)}")
-        return
+    def move(self, direction: str):
+        if direction.find("L") >= 0:
+            self.x -= 1
+        if direction.find("R") >= 0:
+            self.x += 1
+        if direction.find("U") >= 0:
+            self.y += 1
+        if direction.find("D") >= 0:
+            self.y -= 1
 
-    dirX, dirY = (headX - tailX, headY - tailY)
+    def move_to(self, node: 'Node'):
+        targetX, targetY = node.tuple()
+        currentX, currentY = self.tuple()
 
-    if headX == tailX:
-        if headY < tailY:
-            tailY -= 1
-        else:
-            tailY += 1
-        tail = (tailX, tailY)
-        return
+        # No need to move here.
+        if abs(targetX - currentX) <= 1 and abs(targetY - currentY) <= 1:
+            return
 
-    if headY == tailY:
-        if headX < tailX:
-            tailX -= 1
-        else:
-            tailX += 1
-        tail = (tailX, tailY)
-        return
+        # Moving vertically.
+        if targetX == currentX:
+            # It is currently below.
+            if targetY < currentY: 
+                self.move("D")
+            else: self.move("U")
+            return
+        
+        # Moving horizontally
+        if targetY == currentY:
+            # It is to the left.
+            if targetX < currentX:
+                self.move("L")
+            else: self.move("R")
+            return
 
-    if headX < tailX:
-        tailX -= 1
-    else:
-        tailX += 1
+        # Moving diagonally.
+        if targetX < currentX:
+            self.move("L")
+        else: self.move("R")
 
-    if headY < tailY:
-        tailY -= 1
-    else:
-        tailY += 1
-    tail = (tailX, tailY)
+        if targetY < currentY:
+            self.move("D")
+        else: self.move("U")
 
-def loop(times, x, y):
-    global head
-    for _ in range(times):
-        headX, headY = head
-        head = (headX + x, headY + y)
-        move_tail()
+def move_chain(nodes_count: int):
+    nodes = [Node() for _ in range(nodes_count)]
+    slots = set()
 
-for line in lines:
-    direction, count = line.split(" ")
+    for line in lines:
+        direction, count_str = line.split(" ")
+        count = int(count_str)
 
-    if direction == "R":
-        loop(int(count), 1, 0)
-    elif direction == "L":
-        loop(int(count), -1, 0)
-    elif direction == "U":
-        loop(int(count), 0, 1)
-    else:
-        loop(int(count), 0, -1)
+        for _ in range(count):
+            nodes[0].move(direction)
+            for i in range(1, nodes_count):
+                nodes[i].move_to(nodes[i - 1])
+            slots.add(nodes[-1].tuple())
 
-print(len(slots))
+    print(len(slots))
 
-# Part 2, No. I'm too bad for that.
+# Part 1 is head & tail. 2 nodes.
+move_chain(2)
+
+# Part 2 is a bridge of 10 nodes.
+move_chain(10)
