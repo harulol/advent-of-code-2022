@@ -35,6 +35,7 @@ I just aim to brush up my solving skills and utilize multiple languages in my so
 |  11   |   Scala    | `2/2` (a) |
 |  12   |     -      | `0/2` (b) |
 |  13   |  Python3   |   `2/2`   |
+|  14   |  Python3   |   `2/2`   |
 
 #### Notes
 - (a) Didn't understand modular arithmetic well, had to look up what the modulo has to be.
