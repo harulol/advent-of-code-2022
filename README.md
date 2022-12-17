@@ -33,12 +33,11 @@ I just aim to brush up my solving skills and utilize multiple languages in my so
 |   9   |  Python3   |   `2/2`   |
 |  10   |   Kotlin   |   `2/2`   |
 |  11   |   Scala    | `2/2` (a) |
-|  12   |     -      | `0/2` (b) |
+|  12   |  Python3   |   `2/2`   |
 |  13   |  Python3   |   `2/2`   |
 |  14   |  Python3   |   `2/2`   |
-|  15   |  Python3   | `1/2` (c) |
+|  15   |  Python3   | `1/2` (b) |
 
 #### Notes
 - (a) Didn't understand modular arithmetic well, had to look up what the modulo has to be.
-- (b) I can't implement pathfinding properly.
-- (c) Didn't write performant code.
+- (b) Didn't write performant code.
