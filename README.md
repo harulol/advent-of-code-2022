@@ -37,6 +37,11 @@ I just aim to brush up my solving skills and utilize multiple languages in my so
 |  13   |  Python3   |   `2/2`   |
 |  14   |  Python3   |   `2/2`   |
 |  15   |  Python3   | `1/2` (b) |
+|  16   |     -      |   `0/2`   |
+|  17   |     -      |   `0/2`   |
+|  18   |  Python3   |   `1/2`   |
+|  19   |     -      |   `0/2`   |
+|  20   |     -      |   `0/2`   |
 
 #### Notes
 - (a) Didn't understand modular arithmetic well, had to look up what the modulo has to be.
