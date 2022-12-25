@@ -1,101 +1,126 @@
 # Sensor at x=2, y=18: closest beacon is at x=-2, y=15
 import re
+from typing import Union
 
-lines = [s.strip() for s in open("./input.txt").readlines()]
-beacons = set()
-sensors = {}
-distances = {}
+lines: list[str] = [s.strip() for s in open("./input.txt").readlines()]
 
-def manhattan_distance(a, b):
-    aX, aY = a
-    bX, bY = b
-    return abs(bX - aX) + abs(bY - aY)
+beacons: set[tuple[int, int]] = set() # Coords
+sensors: dict[tuple[int, int], tuple[int, int]] = {} # Sensor -> Beacon
+distances: dict[tuple[int, int], int] = {} # Sensor -> Distance
+
+def manhattan_distance(source: tuple[int, int], destination: tuple[int, int]) -> int:
+    a_x, a_y = source
+    b_x, b_y = destination
+    return abs(b_x - a_x) + abs(b_y - a_y)
+
+def tuple_add(a: tuple[int, int], b: tuple[int, int]) -> tuple[int, int]:
+    a_x, a_y = a
+    b_x, b_y = b
+    return (a_x + b_x, a_y + b_y)
 
 def parse_input():
-    beacons.clear()
-    sensors.clear()
-    distances.clear()
-
+    regex = r'Sensor at x=(.+), y=(.+): closest beacon is at x=(.+), y=(.+)'
     for line in lines:
-        regexp = re.search(r'Sensor at x=(.+), y=(.+): closest beacon is at x=(.+), y=(.+)', line)
-        
-        if not regexp:
+        search = re.search(regex, line)
+        if not search:
             raise TypeError()
 
-        beacon = (int(regexp.group(3)), int(regexp.group(4)))
-        sensor = (int(regexp.group(1)), int(regexp.group(2)))
+        beacon = (int(search.group(3)), int(search.group(4)))
+        sensor = (int(search.group(1)), int(search.group(2)))
+
         beacons.add(beacon)
         sensors[sensor] = beacon
-        distances[sensor] = manhattan_distance(sensor, beacon)
+        distances[sensor] = manhattan_distance(beacon, sensor)
 
-def can_reach(sensor, target):
-    dist = distances[sensor]
-    return manhattan_distance(sensor, target) <= dist
+def overlaps(region: tuple[int, int], other: tuple[int, int]) -> Union[tuple[int, int], None]:
+    start, end = region
+    other_start, other_end = other
 
-def impossible_beacon(y):
-    visited = set()
+    if start >= other_start and start <= other_end:
+        return (other_start, max(other_end, end))
+    elif other_start >= start and other_start <= end:
+        return (start, max(other_end, end))
+
+    return None
+
+def smoosh_all_regions(regions: list[tuple[int, int]]):
+    i = 0
+    while i < len(regions):
+        for j in range(len(regions)):
+            if i == j or i >= len(regions) or j >= len(regions):
+                continue
+
+            overlap = overlaps(regions[i], regions[j])
+
+            if overlap:
+                regions[i] = overlap
+                regions.pop(j)
+
+        i += 1
+
+def is_in(number: int, region: tuple[int, int]) -> bool:
+    start, end = region
+    return number >= start and number <= end
+
+def impossible_beacons(y: int) -> int:
+    print("Starting the process to find impossible beacon places")
+    regions = []
 
     for sensor in sensors:
-        current = (sensor[0], y)
-        i = 0
+        y_offset = abs(sensor[1] - y)
+        if y_offset > distances[sensor]:
+            continue
+    
+        min_x = sensor[0] - (distances[sensor] - y_offset)
+        max_x = sensor[0] + (distances[sensor] - y_offset)
+        current = (min_x, max_x)
 
-        # Traverse left.
-        while True:
-            node = (current[0] + i, y)
-            if can_reach(sensor, node):
-                if node not in beacons and node not in sensors:
-                    visited.add(node)
-                i -= 1
-            else: break
+        # Shallow matching.
+        regions.append(current)
+        smoosh_all_regions(regions)
 
-        # Traverse right
-        i = 1
-        while True:
-            node = (current[0] + i, y)
-            if can_reach(sensor, node):
-                if node not in beacons and node not in sensors:
-                    visited.add(node)
-                i += 1
-            else: break
+    # Shallow count, also counting places where there already are beacons and sensors.
+    count = 0
+    for region in regions:
+        count += region[1] - region[0] + 1
+        for beacon, sensor in zip(beacons, sensors.keys()):
+            if beacon[1] == y and is_in(beacon[0], region):
+                count -= 1
+            if sensor[1] == y and is_in(sensor[0], region):
+                count -= 1
 
-    return len(visited)
+    return count
 
-def visualize(x_range, y_range):
-    min_x, max_x = x_range
-    min_y, max_y = y_range
+def find_distress_beacon(min_val: int, max_val: int) -> tuple[int, int]:   
+    print("Starting to scan for the distress beacon")
+    for y in range(min_val, max_val + 1):
+        if y % 100000 == 0:
+            print(f"Searching at {y=}")
 
-    def check(x, y):
-        node = (x, y)
-        if node in beacons:
-            print("B", end="")
-        elif node in sensors:
-            print("S", end="")
-        else:
-            char = '.'
+        x = min_val
+        while x <= max_val:
             for sensor in sensors:
-                if can_reach(sensor, node):
-                    char = '#'
+                #print(f"Checking sensor {sensor} for {x=},{y=}")
+                y_offset = abs(sensor[1] - y)
+                if y_offset > distances[sensor]:
+                    continue
+    
+                min_x = sensor[0] - (distances[sensor] - y_offset)
+                max_x = sensor[0] + (distances[sensor] - y_offset)
+
+                if x >= min_x and x <= max_x:
+                    x = max_x + 1
                     break
-            print(char, end="")
+            else:     
+                return (x, y)
+    
+    return (min_val - 1, min_val - 1)
 
-    for y in range(min_y, max_y + 1):
-        for x in range(min_x, max_x + 1):
-            check(x, y)
-        print()
-
-def scan(minimum, maximum):
-    m = impossible_beacon(0)
-    at = 0
-    for y in range(minimum, maximum + 1):
-        if y % 1000 == 0:
-            print(f"Scanning line {y}")
-        count = impossible_beacon(y)
-        if m != count:
-            at = y
-            break
-
-    return f"Y = {at}"
-
-# Part 1
 parse_input()
-print(impossible_beacon(2000000))
+
+# PART ONE
+print(impossible_beacons(2000000))
+
+# PART TWO
+distress_beacon = find_distress_beacon(0, 4000000)
+print(distress_beacon[0] * 4000000 + distress_beacon[1])

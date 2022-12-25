@@ -36,7 +36,7 @@ I just aim to brush up my solving skills and utilize multiple languages in my so
 |  12   |  Python3   |   `2/2`   |
 |  13   |  Python3   |   `2/2`   |
 |  14   |  Python3   |   `2/2`   |
-|  15   |  Python3   | `1/2` (b) |
+|  15   |  Python3   | `2/2` (b) |
 |  16   |     -      |   `0/2`   |
 |  17   |     -      |   `0/2`   |
 |  18   |  Python3   |   `1/2`   |
@@ -45,4 +45,4 @@ I just aim to brush up my solving skills and utilize multiple languages in my so
 
 #### Notes
 - (a) Didn't understand modular arithmetic well, had to look up what the modulo has to be.
-- (b) Didn't write performant code.
+- (b) Took 40s for it to loop through 4,000,000 lines man. 
