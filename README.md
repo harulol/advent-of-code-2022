@@ -46,7 +46,7 @@ I just aim to brush up my solving skills and utilize multiple languages in my so
 |  22   |  Python3   |   `1/2`   |
 |  23   |     -      |   `0/2`   |
 |  24   |     -      |   `0/2`   |
-|  25   |     -      |   `0/2`   |
+|  25   |     C      |   `1/2`   |
 
 #### Notes
 - (a) Didn't understand modular arithmetic well, had to look up what the modulo has to be.
