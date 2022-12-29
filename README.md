@@ -45,10 +45,11 @@ I just aim to brush up my solving skills and utilize multiple languages in my so
 |  20   |     -      |   `0/2`   |
 |  21   |  Clojure   |   `1/2`   |
 |  22   |  Python3   |   `1/2`   |
-|  23   |     -      |   `0/2`   |
+|  23   |  Python3   | `2/2` (c) |
 |  24   |     -      |   `0/2`   |
 |  25   |     C      |   `1/2`   |
 
 #### Suspicious Notes
 - (a) Didn't understand modular arithmetic well, had to look up what the modulo has to be.
-- (b) Took 40s for it to loop through 4,000,000 lines man. 
+- (b) Took 40s for it to loop through 4,000,000 lines man. Not performant.
+- (c) Took a bit of time too lol. Not performant.
