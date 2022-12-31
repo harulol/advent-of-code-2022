@@ -42,7 +42,7 @@ I just aim to brush up my solving skills and utilize multiple languages in my so
 |  17   |     -      |  `0/2`   |   -   |
 |  18   |  Python3   |  `2/2`   |   -   |
 |  19   |     -      |  `0/2`   |   -   |
-|  20   |     -      |  `0/2`   |   -   |
+|  20   |  Python3   |  `2/2`   |  (d)  |
 |  21   |  Clojure   |  `1/2`   |   -   |
 |  22   |  Python3   |  `1/2`   |   -   |
 |  23   |  Python3   |  `2/2`   |  (c)  |
@@ -53,3 +53,4 @@ I just aim to brush up my solving skills and utilize multiple languages in my so
 - (a) Didn't understand modular arithmetic well, had to look up what the modulo has to be.
 - (b) Took 40s for it to loop through 4,000,000 lines man. Not performant.
 - (c) Took a bit of time too lol. Not performant.
+- (d) Learned about a technique utilizing deques or doubly linked lists on the AoC subreddit.
